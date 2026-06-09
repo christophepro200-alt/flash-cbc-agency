@@ -6,10 +6,6 @@
   <title>Flash CBC Agency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
-  <script type="text/javascript">
-    emailjs.init('nZ6fSWRpsAOUjZtqU');
-  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -725,35 +721,29 @@
     window.addEventListener('scroll', checkReveal);
     checkReveal();
 
-    // Form submission handler
+    // Form submission handler - Formspree
     function handleSubmit(event) {
       event.preventDefault();
       const form = event.target;
       const data = new FormData(form);
       
-      console.log('Form data:', {
-        pseudo: data.get('pseudo'),
-        email: data.get('email'),
-        service: data.get('service'),
-        followers: data.get('followers'),
-        message: data.get('message')
-      });
-      
-      // Send email via EmailJS
-      emailjs.send('service_05ju8vu', 'template_d2lmo3p', {
-        to_email: 'contact.flashcbcagency@gmail.com',
-        from_email: data.get('email'),
-        pseudo: data.get('pseudo'),
-        service: data.get('service'),
-        followers: data.get('followers'),
-        message: data.get('message')
-      }).then(function(response) {
-        console.log('✅ Email envoye!', response);
-        alert('✅ Candidature envoyée ! Nous te recontacterons très rapidement.');
-        form.reset();
-      }, function(error) {
-        console.error('❌ Erreur EmailJS:', error);
-        alert('❌ Erreur: ' + error.text);
+      fetch('https://formspree.io/f/xykqpzaj', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          console.log('✅ Email envoye avec succes!');
+          alert('✅ Candidature envoyée ! Nous te recontacterons très rapidement.');
+          form.reset();
+        } else {
+          alert('❌ Erreur lors de l\'envoi.');
+        }
+      }).catch(error => {
+        console.error('❌ Erreur:', error);
+        alert('❌ Erreur: ' + error.message);
       });
     }
 
