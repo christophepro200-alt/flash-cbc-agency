@@ -6,6 +6,10 @@
   <title>Flash CBC Agency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+  <script type="text/javascript">
+    emailjs.init('nZ6fSWRpsAOUjZtqU');
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -677,11 +681,8 @@
           <label>Service recherché *</label>
           <select name="service" required>
             <option value="">Choisir un service…</option>
-            <option>Management TikTok</option>
             <option>TikTok Live</option>
             <option>Partenariats Marques</option>
-            <option>Formation Premium</option>
-            <option>Analytics & Reporting</option>
             <option>Création de Contenu</option>
           </select>
         </div>
@@ -691,7 +692,7 @@
         </div>
         <div class="form-group">
           <label>Message *</label>
-          <textarea name="message" placeholder="Parle-nous de toi et de tes objectifs…" required></textarea>
+          <textarea name="message" placeholder="Parle-nous de toi et de tes objectifs… (si tu as déjà un agent, les marques sont @nomdeagent)" required></textarea>
         </div>
         <button type="submit" class="form-submit">Envoyer ma candidature ⚡</button>
       </form>
@@ -730,22 +731,30 @@
       const form = event.target;
       const data = new FormData(form);
       
-      // Create email body
-      const emailBody = `
-Nouvelle candidature Flash CBC Agency:
-- Pseudo: ${data.get('pseudo')}
-- Email: ${data.get('email')}
-- Service: ${data.get('service')}
-- Abonnés: ${data.get('followers')}
-- Message: ${data.get('message')}
-      `;
+      console.log('Form data:', {
+        pseudo: data.get('pseudo'),
+        email: data.get('email'),
+        service: data.get('service'),
+        followers: data.get('followers'),
+        message: data.get('message')
+      });
       
-      // Log data (replace with actual email service)
-      console.log(emailBody);
-      
-      // Show success message
-      alert('✅ Candidature envoyée ! Nous te recontacterons très rapidement.');
-      form.reset();
+      // Send email via EmailJS
+      emailjs.send('service_05ju8vu', 'template_d2lmo3p', {
+        to_email: 'contact.flashcbcagency@gmail.com',
+        from_email: data.get('email'),
+        pseudo: data.get('pseudo'),
+        service: data.get('service'),
+        followers: data.get('followers'),
+        message: data.get('message')
+      }).then(function(response) {
+        console.log('✅ Email envoye!', response);
+        alert('✅ Candidature envoyée ! Nous te recontacterons très rapidement.');
+        form.reset();
+      }, function(error) {
+        console.error('❌ Erreur EmailJS:', error);
+        alert('❌ Erreur: ' + error.text);
+      });
     }
 
     // Smooth scroll for anchor links
