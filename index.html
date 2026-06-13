@@ -57,6 +57,93 @@
     }
     nav ul a:hover { color: var(--purple-glow); }
 
+    /* ──── PROFILE DROPDOWN ──── */
+    .profile-btn {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--purple-light);
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-btn:hover {
+      border-color: var(--purple);
+      color: var(--purple-glow);
+    }
+
+    .info-btn {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--purple-light);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+    }
+
+    .info-btn:hover {
+      border-color: var(--purple);
+      color: var(--purple-glow);
+      box-shadow: 0 0 12px rgba(168,85,247,0.3);
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 70px;
+      right: 48px;
+      background: rgba(5,5,5,0.95);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      z-index: 99;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      backdrop-filter: blur(12px);
+    }
+
+    .profile-dropdown.active {
+      display: flex;
+    }
+
+    .profile-dropdown a,
+    .profile-dropdown button {
+      padding: 12px 24px;
+      color: var(--purple-light);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+    }
+
+    .profile-dropdown a:hover,
+    .profile-dropdown button:hover {
+      background: rgba(168,85,247,0.15);
+      color: var(--purple-glow);
+    }
+
+    .profile-dropdown-divider {
+      height: 1px;
+      background: var(--glass-border);
+    }
+
     /* ──── HERO ──── */
     .hero {
       min-height: 100vh;
@@ -513,6 +600,508 @@
     }
     .footer-brand span { color: var(--purple); }
 
+    /* ──── FORUM SECTION ──── */
+    .tab-content {
+      display: none !important;
+    }
+
+    .tab-content.active {
+      display: block !important;
+    }
+
+    #mainContent.hidden {
+      display: none;
+    }
+
+    #forum {
+      max-width: 100%;
+      margin: 0;
+      padding: 60px 0 0 0;
+      overflow: hidden;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .forum-container {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      flex: 1;
+      min-height: calc(100vh - 140px);
+    }
+
+    .forum-container.viewing-topic {
+      transform: translateX(-100%);
+    }
+
+    .forum-list-panel {
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 40px 24px;
+      max-width: 100%;
+    }
+
+    .forum-discussion-panel {
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: rgba(168,85,247,0.03);
+      border-left: 1px solid var(--glass-border);
+      padding: 40px 24px;
+      max-width: 100%;
+    }
+
+    .forum-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding: 0 24px;
+    }
+
+    .forum-title-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .forum-title-section p {
+      color: var(--purple-light);
+      font-size: 0.9rem;
+    }
+
+    .back-to-home {
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--purple-light);
+      border: 1px solid var(--glass-border);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      margin-bottom: 24px;
+    }
+
+    .back-to-home:hover {
+      border-color: var(--purple);
+      color: var(--purple-glow);
+    }
+
+    .back-to-discussion {
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--purple-light);
+      border: 1px solid var(--glass-border);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      margin-bottom: 24px;
+    }
+
+    .back-to-discussion:hover {
+      border-color: var(--purple);
+      color: var(--purple-glow);
+    }
+
+    .new-topic-btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(168,85,247,0.4);
+      margin-bottom: 40px;
+    }
+    .new-topic-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(168,85,247,0.7);
+    }
+
+    .topics-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 60px; }
+
+    .topic-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--purple), var(--purple-dark));
+      transition: width 0.3s;
+    }
+
+    .topic-card:hover {
+      border-color: var(--purple);
+      transform: translateX(4px);
+      background: rgba(168,85,247,0.12);
+    }
+
+    .delete-topic-btn {
+      transition: all 0.3s !important;
+    }
+
+    .delete-topic-btn:hover {
+      background: rgba(239,68,68,0.5) !important;
+      box-shadow: 0 0 15px rgba(239,68,68,0.4) !important;
+      transform: scale(1.05) !important;
+    }
+
+    .topic-content { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+
+    .topic-info { flex: 1; }
+
+    .topic-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 8px; }
+
+    .topic-meta { display: flex; gap: 20px; font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+
+    .topic-desc { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px; }
+
+    .topic-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .tag { display: inline-block; padding: 4px 12px; background: rgba(168,85,247,0.2); border: 1px solid var(--glass-border); border-radius: 16px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); }
+
+    .topic-stats { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; }
+
+    .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--purple); }
+
+    .stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+    /* ──── MODAL STYLES ──── */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: var(--black);
+      border: 1px solid var(--glass-border);
+      padding: 40px;
+      max-width: 700px;
+      width: 100%;
+      border-radius: 8px;
+      position: relative;
+      animation: slideIn 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--purple-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close-modal:hover { color: var(--purple-glow); }
+
+    .modal h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.04em; margin-bottom: 12px; color: var(--white); }
+
+    .modal-meta { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 24px; }
+
+    .discussion-thread { margin-bottom: 32px; }
+
+    .thread-header {
+      background: rgba(168,85,247,0.1);
+      border: 1px solid var(--glass-border);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .thread-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .thread-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .thread-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .thread-stats {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+    }
+
+    .thread-stat {
+      font-size: 0.8rem;
+      color: var(--purple-light);
+    }
+
+    .messages-section {
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .message-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+      border-bottom: 1px solid var(--glass-border);
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .message-item:last-child {
+      border-bottom: none;
+    }
+
+    .message-item:hover {
+      background: rgba(168,85,247,0.05);
+    }
+
+    .message-reply-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 6px 12px;
+      background: transparent;
+      color: var(--purple-light);
+      border: 1px solid var(--glass-border);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      opacity: 0;
+    }
+
+    .message-item:hover .message-reply-btn {
+      opacity: 1;
+    }
+
+    .message-reply-btn:hover {
+      border-color: var(--purple);
+      color: var(--purple-glow);
+      background: rgba(168,85,247,0.1);
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .message-content {
+      flex: 1;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .message-author {
+      font-weight: 600;
+      color: var(--purple);
+      font-size: 0.95rem;
+    }
+
+    .message-date {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .message-text {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
+
+    .reply-section {
+      background: rgba(168,85,247,0.05);
+      border: 1px solid var(--glass-border);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+
+    .reply-section h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .comment { background: rgba(168,85,247,0.05); border-left: 3px solid var(--purple); padding: 16px; margin-bottom: 16px; border-radius: 4px; }
+
+    .comment-author { font-weight: 600; color: var(--purple); font-size: 0.9rem; }
+
+    .comment-time { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-left: 8px; }
+
+    .comment-text { color: rgba(255,255,255,0.8); margin-top: 8px; line-height: 1.6; font-size: 0.9rem; }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 4px;
+    }
+
+    .form-group select {
+      width: 100%;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 4px;
+      -webkit-appearance: none;
+    }
+
+    .form-group select option { background: #1a0a2e; color: var(--white); }
+
+    .form-group select:focus { border-color: var(--purple); }
+
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--purple); }
+
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .modal-buttons { display: flex; gap: 12px; margin-top: 24px; }
+
+    .btn-submit {
+      flex: 1;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 0 24px rgba(168,85,247,0.35);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 48px rgba(168,85,247,0.6);
+    }
+
+    .btn-cancel {
+      flex: 1;
+      padding: 12px;
+      background: transparent;
+      color: var(--purple-light);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-cancel:hover {
+      border-color: var(--purple);
+      color: var(--purple-glow);
+    }
+
     /* ──── SCROLL REVEAL ──── */
     .reveal {
       opacity: 0;
@@ -533,6 +1122,18 @@
       .stats-bar { flex-wrap: wrap; }
       .stat { border-right: none; border-bottom: 1px solid var(--glass-border); }
       footer { flex-direction: column; text-align: center; }
+      
+      .forum-container {
+        height: calc(100vh - 180px);
+      }
+      
+      .forum-list-panel {
+        padding: 40px 16px;
+      }
+      
+      .forum-discussion-panel {
+        padding: 24px 16px;
+      }
     }
   </style>
 </head>
@@ -540,15 +1141,26 @@
 
   <!-- NAV -->
   <nav>
-    <img src="logo-flashcbc.png" class="nav-logo" alt="Flash CBC Agency">
+    <img src="logo-flashcbc.png" class="nav-logo" alt="Flash CBC Agency" onclick="showHome()" style="cursor: pointer;">
     <ul>
-      <li><a href="#about">À propos</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" onclick="navigateToSection(event, 'about')">À propos</a></li>
+      <li><a href="#services" onclick="navigateToSection(event, 'services')">Services</a></li>
+      <li><a href="#" onclick="showForum(event)">Forum</a></li>
+      <li><a href="#contact" onclick="navigateToSection(event, 'contact')">Contact</a></li>
     </ul>
+    <div style="position: relative; display: flex; gap: 12px;">
+      <button class="profile-btn" onclick="toggleProfileDropdown()">👤 Profil</button>
+      <button class="info-btn" onclick="openInfoModal()" title="Informations">ℹ️</button>
+      <div class="profile-dropdown" id="profileDropdown">
+        <button onclick="openLoginModal()">Se connecter</button>
+        <div class="profile-dropdown-divider"></div>
+        <button onclick="openSignupModal()">S'inscrire</button>
+      </div>
+    </div>
   </nav>
 
   <!-- HERO -->
+  <div id="mainContent">
   <section class="hero">
     <svg class="lightning-bg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
       <polyline points="200,0 180,200 220,200 190,400" stroke="#a855f7" stroke-width="1.5" fill="none"/>
@@ -693,7 +1305,139 @@
         <button type="submit" class="form-submit">Envoyer ma candidature ⚡</button>
       </form>
     </div>
+    </div>
   </section>
+
+  <!-- FORUM SECTION -->
+  <section id="forum" class="tab-content">
+    <div class="forum-header">
+      <div class="forum-title-section">
+        <p class="section-eyebrow">Communauté Flash CBC</p>
+        <h2>Forum</h2>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <button class="back-to-home" onclick="showHome()">← Retour au site</button>
+        <button class="back-to-home" onclick="checkAdminAccess()" style="background: rgba(168,85,247,0.2); border-color: var(--purple);">🔐 Admin</button>
+      </div>
+    </div>
+
+    <div class="forum-container" id="forumContainer">
+      <!-- FORUM LIST PANEL -->
+      <div class="forum-list-panel">
+        <button class="new-topic-btn reveal" onclick="openNewTopicModal()">+ Créer un nouveau sujet</button>
+        <div class="topics-grid reveal" id="topicsContainer"></div>
+      </div>
+
+      <!-- FORUM DISCUSSION PANEL -->
+      <div class="forum-discussion-panel" id="discussionPanel">
+        <button class="back-to-discussion" onclick="closeDiscussionView()">← Retour aux sujets</button>
+        
+        <div class="thread-header">
+          <h3 id="panelDiscussionTitle"></h3>
+          <div class="thread-meta">
+            <span class="thread-meta-item">👤 <span id="panelDiscussionAuthor"></span></span>
+            <span class="thread-meta-item">📅 <span id="panelDiscussionDate"></span></span>
+          </div>
+          <div class="thread-stats">
+            <div class="thread-stat">📬 <span id="panelMessageCount">0</span> messages</div>
+          </div>
+        </div>
+
+        <div class="messages-section" id="panelDiscussionComments" style="margin-bottom: 24px;"></div>
+
+        <div class="reply-section">
+          <h4>Ajouter une réponse</h4>
+          <div class="form-group">
+            <label>Ton pseudo *</label>
+            <input type="text" id="panelReplyAuthor" placeholder="Ton pseudo TikTok" required>
+          </div>
+          <div class="form-group">
+            <label>Ta réponse *</label>
+            <textarea id="panelReplyText" placeholder="Partage ton avis, tes conseils ou tes expériences..." required></textarea>
+          </div>
+          <button type="button" class="btn-primary" onclick="submitPanelReply()" style="margin-top: 12px;">Envoyer la réponse ⚡</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL ADMIN -->
+  <div class="modal" id="adminModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeAdminPanel()">✕</button>
+      <h2>🛡️ Panel Admin</h2>
+      <p style="color: rgba(255,255,255,0.6); margin-bottom: 24px;">Gérez les administrateurs et modérateurs de votre forum</p>
+      
+      <!-- ADMINS SECTION -->
+      <div style="margin-bottom: 32px;">
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; margin-bottom: 12px; color: var(--white);">👑 Administrateurs</h3>
+        <div id="adminsList"></div>
+      </div>
+
+      <div style="margin-bottom: 32px;">
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; margin-bottom: 12px; color: var(--white);">Ajouter un administrateur</h3>
+        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 12px;">Entrez l'email d'un utilisateur inscrit</p>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="newAdminInput" placeholder="Email de l'utilisateur" style="flex: 1; background: var(--glass); border: 1px solid var(--glass-border); color: var(--white); padding: 12px 16px; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;">
+          <button onclick="addNewAdmin()" style="padding: 12px 24px; background: linear-gradient(135deg, var(--purple-dark), var(--purple)); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85rem; border: none; cursor: pointer; border-radius: 4px; transition: box-shadow 0.2s;">+ Ajouter</button>
+        </div>
+      </div>
+
+      <!-- MODERATORS SECTION -->
+      <div style="margin-bottom: 32px; border-top: 1px solid var(--glass-border); padding-top: 24px;">
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; margin-bottom: 12px; color: var(--white);">🛡️ Modérateurs</h3>
+        <div id="moderatorsList"></div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; margin-bottom: 12px; color: var(--white);">Ajouter un modérateur</h3>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="newModeratorInput" placeholder="Pseudo du futur modérateur" style="flex: 1; background: var(--glass); border: 1px solid var(--glass-border); color: var(--white); padding: 12px 16px; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;">
+          <button onclick="addNewModerator()" style="padding: 12px 24px; background: linear-gradient(135deg, var(--purple-dark), var(--purple)); color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85rem; border: none; cursor: pointer; border-radius: 4px; transition: box-shadow 0.2s;">+ Ajouter</button>
+        </div>
+      </div>
+
+      <button onclick="closeAdminPanel()" class="btn-cancel" style="width: 100%; padding: 12px;">Fermer</button>
+    </div>
+  </div>
+
+  <!-- MODAL NEW TOPIC -->
+  <div class="modal" id="newTopicModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeNewTopicModal()">✕</button>
+      <h2>Créer un nouveau sujet</h2>
+      <form id="newTopicForm">
+        <div class="form-group">
+          <label>Titre du sujet *</label>
+          <input type="text" id="topicTitle" placeholder="Ex: Comment augmenter ma visibilité TikTok ?" required>
+        </div>
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea id="topicDesc" placeholder="Décris ton problématique ou ta question..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Catégorie *</label>
+          <select id="topicCategory" required>
+            <option value="">Choisir une catégorie...</option>
+            <option value="strategy">Stratégie</option>
+            <option value="live">TikTok Live</option>
+            <option value="brands">Partenariats Marques</option>
+            <option value="content">Création de Contenu</option>
+            <option value="growth">Croissance</option>
+            <option value="other">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Pseudo *</label>
+          <input type="text" id="topicAuthor" placeholder="Ton pseudo TikTok" required>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn-submit">Publier le sujet ⚡</button>
+          <button type="button" class="btn-cancel" onclick="closeNewTopicModal()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -703,6 +1447,88 @@
     </div>
     <p>Transformons les créateurs en légendes 🚀</p>
   </footer>
+
+  <!-- MODAL INFO -->
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeInfoModal()">✕</button>
+      <h2>ℹ️ À propos du site</h2>
+      <div style="color: rgba(255,255,255,0.8); line-height: 1.8;">
+        <h3 style="color: var(--purple); margin-top: 20px; margin-bottom: 10px;">Flash CBC Agency</h3>
+        <p>Bienvenue sur Flash CBC Agency - Agence de Management TikTok</p>
+        
+        <h3 style="color: var(--purple); margin-top: 20px; margin-bottom: 10px;">🎯 Notre Mission</h3>
+        <p>Nous transformons les créateurs pour les propulser vers le succès sur TikTok.</p>
+        
+        <h3 style="color: var(--purple); margin-top: 20px; margin-bottom: 10px;">💬 Forum</h3>
+        <p>Rejoignez notre communauté pour échanger avec d'autres créateurs, partager vos expériences et obtenir des conseils.</p>
+        
+        <h3 style="color: var(--purple); margin-top: 20px; margin-bottom: 10px;">🔐 Sécurité</h3>
+        <p>Vos données sont stockées localement dans votre navigateur. Aucune donnée n'est envoyée à des serveurs externes.</p>
+        
+        <h3 style="color: var(--purple); margin-top: 20px; margin-bottom: 10px;">📞 Contact</h3>
+        <p>Questions ? Rendez-vous à la section Contact pour nous envoyer un message directement.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeLoginModal()">✕</button>
+      <h2>Se connecter</h2>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email ou Pseudo TikTok *</label>
+          <input type="text" id="loginEmail" placeholder="ton@email.com ou @tonpseudo" required>
+        </div>
+        <div class="form-group">
+          <label>Mot de passe *</label>
+          <input type="password" id="loginPassword" placeholder="Ton mot de passe" required>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn-submit">Se connecter</button>
+          <button type="button" class="btn-cancel" onclick="closeLoginModal()">Annuler</button>
+        </div>
+      </form>
+      <p style="text-align: center; margin-top: 16px; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+        Pas encore inscrit ? <button onclick="switchToSignup()" style="background: none; border: none; color: var(--purple); cursor: pointer; font-weight: 600; text-decoration: underline;">S'inscrire ici</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- MODAL SIGNUP -->
+  <div class="modal" id="signupModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeSignupModal()">✕</button>
+      <h2>S'inscrire</h2>
+      <form id="signupForm" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label>Pseudo TikTok *</label>
+          <input type="text" id="signupPseudo" placeholder="@tonpseudo" required>
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="signupEmail" placeholder="ton@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Mot de passe *</label>
+          <input type="password" id="signupPassword" placeholder="Crée un mot de passe sécurisé" required>
+        </div>
+        <div class="form-group">
+          <label>Confirmer le mot de passe *</label>
+          <input type="password" id="signupPasswordConfirm" placeholder="Confirme ton mot de passe" required>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn-submit">S'inscrire</button>
+          <button type="button" class="btn-cancel" onclick="closeSignupModal()">Annuler</button>
+        </div>
+      </form>
+      <p style="text-align: center; margin-top: 16px; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
+        Déjà inscrit ? <button onclick="switchToLogin()" style="background: none; border: none; color: var(--purple); cursor: pointer; font-weight: 600; text-decoration: underline;">Se connecter ici</button>
+      </p>
+    </div>
+  </div>
 
   <script>
     // Scroll reveal animation
@@ -736,14 +1562,12 @@
       }).then(response => {
         if (response.ok) {
           console.log('✅ Email envoye avec succes!');
-          alert('✅ Candidature envoyée ! Nous te recontacterons très rapidement.');
           form.reset();
         } else {
-          alert('❌ Erreur lors de l\'envoi.');
+          console.error('Erreur lors de l\'envoi');
         }
       }).catch(error => {
         console.error('❌ Erreur:', error);
-        alert('❌ Erreur: ' + error.message);
       });
     }
 
@@ -756,6 +1580,975 @@
           target.scrollIntoView({ behavior: 'smooth' });
         }
       });
+    });
+
+    /* ──── FORUM FUNCTIONALITY ──── */
+    const FORUM_STORAGE_KEY = 'flashcbc_forum_topics';
+    const MODERATORS_STORAGE_KEY = 'flashcbc_moderators';
+    const ADMINS_STORAGE_KEY = 'flashcbc_admins';
+    const ADMIN_PASSWORD = 'Flash2026!'; // Change ce mot de passe !
+    
+    // DISCORD WEBHOOKS
+    const WEBHOOK_AUTH = 'https://discord.com/api/webhooks/1515410329788747969/WQkG8jyTGBd1dyJQwokFosNR0OLR2OYlorxHSjxXL1gtgQpZS8cxEWp5PBpnylWF2zQP';
+    const WEBHOOK_MODERATION = 'https://discord.com/api/webhooks/1515410635377086666/XaA-z4WsCdiP23gE_2Jtpps_40e8Zx6KiG6nFoDT3V_AuI9pNMabS_gh7LPCixwl6jvA';
+    const WEBHOOK_FORUM = 'https://discord.com/api/webhooks/1515399389357670503/CrvdwEhIHEZDQB9MEayPu87IKREXKci4jmlgtFhTJaTUNSMsYlFL5tpwDm2Lpxb1goee';
+    
+    let currentTopicId = null;
+    let currentUser = null;
+    let isAdminLoggedIn = false;
+
+    const defaultTopics = [];
+
+    function initForum() {
+      let topics = getTopics();
+      renderTopics(topics);
+      initModerators();
+      initAdmins();
+    }
+
+    function initModerators() {
+      const stored = localStorage.getItem(MODERATORS_STORAGE_KEY);
+      if (!stored) {
+        localStorage.setItem(MODERATORS_STORAGE_KEY, JSON.stringify([]));
+      }
+    }
+
+    function getModerators() {
+      const stored = localStorage.getItem(MODERATORS_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveModerators(moderators) {
+      localStorage.setItem(MODERATORS_STORAGE_KEY, JSON.stringify(moderators));
+    }
+
+    function isModerator(author) {
+      return getModerators().includes(author);
+    }
+
+    function addModerator(author) {
+      const mods = getModerators();
+      if (!mods.includes(author)) {
+        mods.push(author);
+        saveModerators(mods);
+      }
+    }
+
+    function addModeratorWithLog(author) {
+      addModerator(author);
+      const currentUser = getCurrentUser();
+      sendModerationLog('🛡️ Modérateur promu', [
+        { name: 'Pseudo promu', value: author, inline: true },
+        { name: 'Par', value: currentUser || 'Système', inline: true },
+        { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+      ]);
+    }
+
+    function removeModerator(author) {
+      let mods = getModerators();
+      mods = mods.filter(m => m !== author);
+      saveModerators(mods);
+    }
+
+    function removeModeratorWithLog(author) {
+      removeModerator(author);
+      const currentUser = getCurrentUser();
+      sendModerationLog('🗑️ Modérateur retiré', [
+        { name: 'Pseudo retiré', value: author, inline: true },
+        { name: 'Par', value: currentUser || 'Système', inline: true },
+        { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+      ]);
+    }
+
+    /* ──── ADMINS MANAGEMENT ──── */
+    function initAdmins() {
+      const stored = localStorage.getItem(ADMINS_STORAGE_KEY);
+      let admins = stored ? JSON.parse(stored) : [];
+      
+      // S'assurer que cacao.nathan09@gmail.com est toujours admin
+      if (!admins.includes('cacao.nathan09@gmail.com')) {
+        admins.push('cacao.nathan09@gmail.com');
+        localStorage.setItem(ADMINS_STORAGE_KEY, JSON.stringify(admins));
+      }
+    }
+
+    function getAdmins() {
+      const stored = localStorage.getItem(ADMINS_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveAdmins(admins) {
+      localStorage.setItem(ADMINS_STORAGE_KEY, JSON.stringify(admins));
+    }
+
+    function isAdmin(email) {
+      return getAdmins().includes(email);
+    }
+
+    function addAdmin(email) {
+      const admins = getAdmins();
+      if (!admins.includes(email)) {
+        admins.push(email);
+        saveAdmins(admins);
+      }
+    }
+
+    function removeAdmin(email) {
+      let admins = getAdmins();
+      admins = admins.filter(a => a !== email);
+      saveAdmins(admins);
+
+      // LOG: Admin retiré
+      const currentUser = getCurrentUser();
+      sendModerationLog('⛔ Admin retiré', [
+        { name: 'Email retiré', value: email, inline: true },
+        { name: 'Par', value: currentUser || 'Système', inline: true },
+        { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+      ]);
+    }
+
+    function loginAdmin() {
+      const currentUser = getCurrentUser();
+      const currentEmail = getCurrentUserEmail();
+      
+      if (!currentUser || !currentEmail) {
+        alert('❌ Vous devez être connecté pour accéder au panel admin');
+        openLoginModal();
+        return;
+      }
+
+      if (!isAdmin(currentEmail)) {
+        alert('❌ Vous n\'avez pas les permissions d\'administrateur');
+        return;
+      }
+
+      isAdminLoggedIn = true;
+      openAdminPanel();
+      alert('✅ Connecté en tant qu\'admin !');
+    }
+
+    function checkAdminAccess() {
+      const currentUser = getCurrentUser();
+      const currentEmail = getCurrentUserEmail();
+      
+      if (!currentUser || !currentEmail) {
+        console.warn('Accès admin refusé: utilisateur non connecté');
+        openLoginModal();
+        return;
+      }
+
+      const admins = getAdmins();
+      const isUserAdmin = admins.includes(currentEmail);
+
+      if (!isUserAdmin) {
+        console.warn(`Accès admin refusé pour ${currentEmail}`);
+        return;
+      }
+
+      isAdminLoggedIn = true;
+      openAdminPanel();
+    }
+
+    function logoutAdmin() {
+      isAdminLoggedIn = false;
+    }
+
+    function getTopics() {
+      const stored = localStorage.getItem(FORUM_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveTopics(topics) {
+      localStorage.setItem(FORUM_STORAGE_KEY, JSON.stringify(topics));
+    }
+
+    function renderTopics(topics) {
+      const container = document.getElementById('topicsContainer');
+      container.innerHTML = '';
+
+      if (topics.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5); padding: 40px;">Aucun sujet pour le moment. Crée le premier ! ⚡</p>';
+        return;
+      }
+
+      topics.reverse().forEach(topic => {
+        const categoryEmoji = { 'strategy': '📈', 'live': '🔴', 'brands': '🤝', 'content': '🎬', 'growth': '⚡', 'other': '💬' };
+        const categoryLabel = { 'strategy': 'Stratégie', 'live': 'TikTok Live', 'brands': 'Partenariats', 'content': 'Contenu', 'growth': 'Croissance', 'other': 'Autre' };
+
+        const card = document.createElement('div');
+        card.className = 'topic-card';
+        card.style.cursor = 'pointer';
+        card.style.position = 'relative';
+
+        const modBadge = isModerator(topic.author) ? ' <span style="background: linear-gradient(135deg, #a855f7, #7c3aed); padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; margin-left: 8px;">🛡️ MOD</span>' : '';
+        
+        // Vérifier si l'utilisateur est admin
+        const currentEmail = getCurrentUserEmail();
+        const userIsAdmin = currentEmail && getAdmins().includes(currentEmail);
+        
+        // Bouton corbeille simple pour les admins
+        const deleteBtn = userIsAdmin ? `<button class="delete-topic-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.5rem; cursor: pointer; z-index: 10; transition: transform 0.2s; padding: 0; line-height: 1;" title="Supprimer ce sujet">🗑️</button>` : '';
+        
+        card.innerHTML = `
+          <div class="topic-content">
+            <div class="topic-info">
+              <h3 class="topic-title">${escapeHtml(topic.title)}</h3>
+              <div class="topic-meta">
+                <span>👤 ${escapeHtml(topic.author)}${modBadge}</span>
+                <span>📅 ${topic.date}</span>
+              </div>
+              <p class="topic-desc">${escapeHtml(topic.desc)}</p>
+              <div class="topic-tags">
+                <span class="tag">${categoryEmoji[topic.category]} ${categoryLabel[topic.category]}</span>
+              </div>
+            </div>
+            <div class="topic-stats">
+              <div class="stat-item">
+                <span class="stat-number">${topic.comments ? topic.comments.length : 0}</span>
+                <span class="stat-label">Réponses</span>
+              </div>
+            </div>
+          </div>
+          ${deleteBtn}
+        `;
+        
+        // Ajouter les event listeners
+        const contentDiv = card.querySelector('.topic-content');
+        if (contentDiv) {
+          contentDiv.addEventListener('click', () => openDiscussionPanel(topic));
+        }
+        
+        const deleteBtnElement = card.querySelector('.delete-topic-btn');
+        if (deleteBtnElement) {
+          deleteBtnElement.addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteTopic(topic.id);
+          });
+          // Animation au survol
+          deleteBtnElement.addEventListener('mouseover', () => {
+            deleteBtnElement.style.transform = 'scale(1.3)';
+          });
+          deleteBtnElement.addEventListener('mouseout', () => {
+            deleteBtnElement.style.transform = 'scale(1)';
+          });
+        }
+        
+        container.appendChild(card);
+      });
+    }
+
+    function openNewTopicModal() {
+      document.getElementById('newTopicModal').classList.add('active');
+      // Pré-remplir le pseudo si l'utilisateur est connecté
+      const currentUser = getCurrentUser();
+      if (currentUser) {
+        document.getElementById('topicAuthor').value = currentUser;
+      }
+    }
+
+    function closeNewTopicModal() {
+      document.getElementById('newTopicModal').classList.remove('active');
+      document.getElementById('newTopicForm').reset();
+    }
+
+    function openDiscussionPanel(topic) {
+      currentTopicId = topic.id;
+      document.getElementById('panelDiscussionTitle').textContent = escapeHtml(topic.title);
+      document.getElementById('panelDiscussionAuthor').textContent = escapeHtml(topic.author);
+      document.getElementById('panelDiscussionDate').textContent = topic.date;
+      document.getElementById('panelMessageCount').textContent = (topic.comments ? topic.comments.length : 0);
+
+      const commentsContainer = document.getElementById('panelDiscussionComments');
+      commentsContainer.innerHTML = '';
+
+      if (!topic.comments || topic.comments.length === 0) {
+        commentsContainer.innerHTML = '<div style="padding: 40px; text-align: center; color: rgba(255,255,255,0.5);">Aucune réponse pour le moment. Sois le premier à lancer la conversation ! 💬</div>';
+      } else {
+        topic.comments.forEach((comment, index) => {
+          const avatar = comment.author.charAt(0).toUpperCase();
+          const messageEl = document.createElement('div');
+          messageEl.className = 'message-item';
+          
+          const modBadge = isModerator(comment.author) ? ' <span style="background: linear-gradient(135deg, #a855f7, #7c3aed); padding: 2px 6px; border-radius: 3px; font-size: 0.65rem; margin-left: 6px;">🛡️ MOD</span>' : '';
+          const deleteBtn = isAdminLoggedIn ? `<button onclick="deleteComment(${index}); event.stopPropagation();" style="position: absolute; top: 16px; right: 70px; padding: 8px 12px; background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; cursor: pointer; font-size: 0.65rem; font-weight: 600;">🗑️ Supprimer</button>` : '';
+          
+          messageEl.innerHTML = `
+            <div class="message-avatar">${avatar}</div>
+            <div class="message-content">
+              <div class="message-header">
+                <span class="message-author">${escapeHtml(comment.author)}${modBadge}</span>
+                <span class="message-date">${comment.date}</span>
+              </div>
+              <div class="message-text">${escapeHtml(comment.text)}</div>
+            </div>
+            <button class="message-reply-btn" onclick="replyToMessage('${escapeHtml(comment.author)}')">Répondre</button>
+            ${deleteBtn}
+          `;
+          commentsContainer.appendChild(messageEl);
+        });
+      }
+
+      document.getElementById('forumContainer').classList.add('viewing-topic');
+      document.getElementById('panelReplyText').value = '';
+      
+      // Pré-remplir le pseudo de réponse si l'utilisateur est connecté
+      const currentUser = getCurrentUser();
+      if (currentUser) {
+        document.getElementById('panelReplyAuthor').value = currentUser;
+      } else {
+        document.getElementById('panelReplyAuthor').value = '';
+      }
+    }
+
+    function deleteTopic(topicId) {
+      if (!isAdminLoggedIn && !isModerator(currentUser)) {
+        console.warn('Permission refusée pour supprimer le sujet');
+        return;
+      }
+
+      if (confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce sujet ?')) {
+        let topics = getTopics();
+        const topic = topics.find(t => t.id === topicId);
+        const currentUser = getCurrentUser();
+        
+        topics = topics.filter(t => t.id !== topicId);
+        saveTopics(topics);
+        renderTopics(topics);
+        
+        sendToDiscord({
+          embeds: [{
+            color: 0xef4444,
+            title: '🗑️ Sujet supprimé par modération',
+            description: `Un sujet a été supprimé par un modérateur.`,
+            footer: { text: 'Flash CBC Forum' }
+          }]
+        });
+
+        // LOG: Sujet supprimé
+        if (topic) {
+          sendModerationLog('🗑️ Sujet supprimé', [
+            { name: 'Titre', value: topic.title, inline: false },
+            { name: 'Auteur original', value: topic.author, inline: true },
+            { name: 'Supprimé par', value: currentUser || 'Système', inline: true },
+            { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+          ]);
+        }
+
+        alert('✅ Sujet supprimé');
+      }
+    }
+
+    function deleteComment(commentIndex) {
+      if (!isAdminLoggedIn && !isModerator(currentUser)) {
+        console.warn('Permission refusée pour supprimer le commentaire');
+        return;
+      }
+
+      if (confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
+        let topics = getTopics();
+        const topic = topics.find(t => t.id === currentTopicId);
+        const currentUserEmail = getCurrentUserEmail();
+        
+        if (topic && topic.comments) {
+          const deletedComment = topic.comments[commentIndex];
+          
+          topic.comments.splice(commentIndex, 1);
+          saveTopics(topics);
+          openDiscussionPanel(topic);
+          
+          sendToDiscord({
+            embeds: [{
+              color: 0xef4444,
+              title: '🗑️ Réponse supprimée par modération',
+              description: `Une réponse dans "${topic.title}" a été supprimée.`,
+              footer: { text: 'Flash CBC Forum' }
+            }]
+          });
+
+          // LOG: Commentaire supprimé
+          const currentUser = getCurrentUser();
+          sendModerationLog('🗑️ Commentaire supprimé', [
+            { name: 'Sujet', value: topic.title, inline: false },
+            { name: 'Auteur du commentaire', value: deletedComment ? deletedComment.author : 'Inconnu', inline: true },
+            { name: 'Supprimé par', value: currentUser || 'Système', inline: true },
+            { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+          ]);
+
+          alert('✅ Commentaire supprimé');
+        }
+      }
+    }
+
+    function openAdminPanel() {
+      if (!isAdminLoggedIn) {
+        console.warn('Accès panel admin refusé');
+        return;
+      }
+      document.getElementById('adminModal').classList.add('active');
+      renderAdminsList();
+      renderModeratorsList();
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('adminModal').classList.remove('active');
+    }
+
+    function renderAdminsList() {
+      const admins = getAdmins();
+      const container = document.getElementById('adminsList');
+      container.innerHTML = '';
+
+      if (admins.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">Aucun administrateur pour le moment.</p>';
+        return;
+      }
+
+      admins.forEach(admin => {
+        const item = document.createElement('div');
+        item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px; background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); border-radius: 4px; margin-bottom: 8px;';
+        item.innerHTML = `
+          <span style="color: var(--purple-light);">👑 ${escapeHtml(admin)}</span>
+          <button onclick="removeAdmin('${escapeHtml(admin)}'); renderAdminsList();" style="padding: 6px 12px; background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">Retirer</button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addNewAdmin() {
+      const email = document.getElementById('newAdminInput').value.trim();
+      if (!email) {
+        console.warn('Email vide pour ajouter admin');
+        return;
+      }
+
+      const users = getUsers();
+      const userExists = users.some(u => u.email === email);
+      
+      if (!userExists) {
+        console.warn(`Email ${email} non trouvé`);
+        return;
+      }
+
+      if (getAdmins().includes(email)) {
+        console.warn(`${email} est déjà admin`);
+        return;
+      }
+
+      addAdmin(email);
+      document.getElementById('newAdminInput').value = '';
+      renderAdminsList();
+
+      // LOG: Admin ajouté
+      const currentUser = getCurrentUser();
+      sendModerationLog('👑 Admin promu', [
+        { name: 'Email promis', value: email, inline: true },
+        { name: 'Par', value: currentUser || 'Système', inline: true },
+        { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+      ]);
+    }
+
+    function renderModeratorsList() {
+      const mods = getModerators();
+      const container = document.getElementById('moderatorsList');
+      container.innerHTML = '';
+
+      if (mods.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">Aucun modérateur pour le moment.</p>';
+        return;
+      }
+
+      mods.forEach(mod => {
+        const item = document.createElement('div');
+        item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.25); border-radius: 4px; margin-bottom: 8px;';
+        item.innerHTML = `
+          <span style="color: var(--purple-light);">🛡️ ${escapeHtml(mod)}</span>
+          <button onclick="removeModeratorWithLog('${escapeHtml(mod)}'); renderModeratorsList();" style="padding: 6px 12px; background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; cursor: pointer; font-size: 0.7rem; font-weight: 600;">Retirer</button>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addNewModerator() {
+      const author = document.getElementById('newModeratorInput').value.trim();
+      if (!author) {
+        console.warn('Pseudo vide pour ajouter modérateur');
+        return;
+      }
+
+      if (getModerators().includes(author)) {
+        console.warn(`${author} est déjà modérateur`);
+        return;
+      }
+
+      addModeratorWithLog(author);
+      document.getElementById('newModeratorInput').value = '';
+      renderModeratorsList();
+      alert('✅ Modérateur ajouté !');
+    }
+
+    function closeDiscussionView() {
+      document.getElementById('forumContainer').classList.remove('viewing-topic');
+      document.getElementById('panelReplyText').value = '';
+      document.getElementById('panelReplyAuthor').value = '';
+      currentTopicId = null;
+    }
+
+    function replyToMessage(author) {
+      const replyField = document.getElementById('panelReplyText');
+      const discussionPanel = document.getElementById('discussionPanel');
+      
+      // Ajouter la mention au champ de réponse
+      replyField.value = `@${author} `;
+      
+      // Focus sur le champ de réponse
+      replyField.focus();
+      
+      // Scroll vers la section de réponse
+      setTimeout(() => {
+        const replySection = document.querySelector('.reply-section');
+        replySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+
+    function replyToMessage(author) {
+      const replyField = document.getElementById('panelReplyText');
+      const discussionPanel = document.getElementById('discussionPanel');
+      
+      // Ajouter la mention au champ de réponse
+      replyField.value = `@${author} `;
+      
+      // Focus sur le champ de réponse
+      replyField.focus();
+      
+      // Scroll vers la section de réponse
+      setTimeout(() => {
+        const replySection = document.querySelector('.reply-section');
+        replySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+
+    function submitPanelReply() {
+      const text = document.getElementById('panelReplyText').value.trim();
+      const author = document.getElementById('panelReplyAuthor').value.trim();
+
+      if (!text || !author) {
+        alert('❌ Veuillez remplir tous les champs');
+        return;
+      }
+
+      currentUser = author; // Mettre à jour l'utilisateur actuel
+      const topics = getTopics();
+      const topic = topics.find(t => t.id === currentTopicId);
+
+      if (topic) {
+        if (!topic.comments) topic.comments = [];
+        const newComment = {
+          author: author,
+          text: text,
+          date: new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' })
+        };
+        topic.comments.push(newComment);
+        saveTopics(topics);
+        
+        // Envoyer à Discord
+        sendToDiscord({
+          embeds: [{
+            color: 0xa855f7,
+            title: `📝 Nouvelle réponse dans "${topic.title}"`,
+            fields: [
+              { name: 'Auteur', value: author, inline: true },
+              { name: 'Sujet', value: topic.title, inline: false },
+              { name: 'Réponse', value: text, inline: false },
+              { name: 'Date', value: newComment.date, inline: true }
+            ],
+            footer: { text: 'Flash CBC Forum' }
+          }]
+        });
+        
+        openDiscussionPanel(topic);
+      }
+    }
+
+    function sendToDiscord(payload) {
+      fetch(WEBHOOK_FORUM, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(error => console.error('Erreur Discord:', error));
+    }
+
+    function sendAuthLog(title, fields) {
+      fetch(WEBHOOK_AUTH, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            color: 0x3498db,
+            title: title,
+            fields: fields,
+            timestamp: new Date().toISOString(),
+            footer: { text: 'Flash CBC Auth Logs' }
+          }]
+        })
+      }).catch(error => console.error('Erreur Auth Log:', error));
+    }
+
+    function sendModerationLog(title, fields) {
+      fetch(WEBHOOK_MODERATION, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            color: 0xe74c3c,
+            title: title,
+            fields: fields,
+            timestamp: new Date().toISOString(),
+            footer: { text: 'Flash CBC Moderation Logs' }
+          }]
+        })
+      }).catch(error => console.error('Erreur Moderation Log:', error));
+    }
+
+    function sendForumLog(title, fields, color = 0xa855f7) {
+      fetch(WEBHOOK_FORUM, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            color: color,
+            title: title,
+            fields: fields,
+            timestamp: new Date().toISOString(),
+            footer: { text: 'Flash CBC Forum Logs' }
+          }]
+        })
+      }).catch(error => console.error('Erreur Forum Log:', error));
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    window.addEventListener('click', function(e) {
+      const newTopicModal = document.getElementById('newTopicModal');
+      if (e.target === newTopicModal) closeNewTopicModal();
+    });
+
+    document.getElementById('newTopicForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const author = document.getElementById('topicAuthor').value;
+      currentUser = author; // Mettre à jour l'utilisateur actuel
+
+      const newTopic = {
+        id: Date.now(),
+        title: document.getElementById('topicTitle').value,
+        desc: document.getElementById('topicDesc').value,
+        author: author,
+        category: document.getElementById('topicCategory').value,
+        date: new Date().toLocaleDateString('fr-FR'),
+        comments: []
+      };
+
+      const topics = getTopics();
+      topics.push(newTopic);
+      saveTopics(topics);
+      renderTopics(topics);
+      closeNewTopicModal();
+
+      // Envoyer à Discord
+      const categoryEmoji = { 'strategy': '📈', 'live': '🔴', 'brands': '🤝', 'content': '🎬', 'growth': '⚡', 'other': '💬' };
+      const categoryLabel = { 'strategy': 'Stratégie', 'live': 'TikTok Live', 'brands': 'Partenariats', 'content': 'Contenu', 'growth': 'Croissance', 'other': 'Autre' };
+      
+      sendToDiscord({
+        embeds: [{
+          color: 0xa855f7,
+          title: `🆕 Nouveau sujet créé`,
+          fields: [
+            { name: 'Titre', value: newTopic.title, inline: false },
+            { name: 'Auteur', value: newTopic.author, inline: true },
+            { name: 'Catégorie', value: categoryEmoji[newTopic.category] + ' ' + categoryLabel[newTopic.category], inline: true },
+            { name: 'Description', value: newTopic.desc, inline: false },
+            { name: 'Date', value: newTopic.date, inline: true }
+          ],
+          footer: { text: 'Flash CBC Forum' }
+        }]
+      });
+    });
+
+    // Initialize forum and auth on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      initForum();
+      initializeUsers();
+      updateProfileButton();
+    });
+
+    /* ──── TAB MANAGEMENT ──── */
+    function showForum(e) {
+      if (e) e.preventDefault();
+      document.getElementById('mainContent').classList.add('hidden');
+      document.getElementById('forum').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function showHome() {
+      document.getElementById('mainContent').classList.remove('hidden');
+      document.getElementById('forum').classList.remove('active');
+      window.scrollTo(0, 0);
+    }
+
+    function navigateToSection(e, sectionId) {
+      e.preventDefault();
+      // Quitter le forum d'abord
+      document.getElementById('mainContent').classList.remove('hidden');
+      document.getElementById('forum').classList.remove('active');
+      
+      // Puis scroller vers la section
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+
+    // Close modals with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const newTopicModal = document.getElementById('newTopicModal');
+        if (newTopicModal.classList.contains('active')) closeNewTopicModal();
+      }
+    });
+
+    /* ──── AUTHENTICATION SYSTEM ──── */
+    const AUTH_STORAGE_KEY = 'flashcbc_users';
+    const CURRENT_USER_KEY = 'flashcbc_current_user';
+
+    function initializeUsers() {
+      const stored = localStorage.getItem(AUTH_STORAGE_KEY);
+      if (!stored) {
+        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify([]));
+      }
+    }
+
+    function getUsers() {
+      const stored = localStorage.getItem(AUTH_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      return localStorage.getItem(CURRENT_USER_KEY);
+    }
+
+    function getCurrentUserEmail() {
+      const currentPseudo = getCurrentUser();
+      if (!currentPseudo) return null;
+      
+      const users = getUsers();
+      const user = users.find(u => u.pseudo === currentPseudo);
+      return user ? user.email : null;
+    }
+
+    function setCurrentUser(pseudo) {
+      localStorage.setItem(CURRENT_USER_KEY, pseudo);
+      updateProfileButton();
+    }
+
+    function logout() {
+      const currentUser = getCurrentUser();
+      const currentEmail = getCurrentUserEmail();
+      
+      localStorage.removeItem(CURRENT_USER_KEY);
+      updateProfileButton();
+
+      // LOG: Déconnexion
+      if (currentUser && currentEmail) {
+        sendAuthLog('👋 Déconnexion', [
+          { name: 'Pseudo', value: currentUser, inline: true },
+          { name: 'Email', value: currentEmail, inline: true },
+          { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+        ]);
+      }
+    }
+
+    function updateProfileButton() {
+      const profileBtn = document.querySelector('.profile-btn');
+      const currentUser = getCurrentUser();
+
+      if (currentUser) {
+        profileBtn.textContent = `👤 ${currentUser}`;
+        document.getElementById('profileDropdown').innerHTML = `
+          <button onclick="viewProfile()">${currentUser}</button>
+          <div class="profile-dropdown-divider"></div>
+          <button onclick="logout(); toggleProfileDropdown();">Se déconnecter</button>
+        `;
+      } else {
+        profileBtn.textContent = '👤 Profil';
+        document.getElementById('profileDropdown').innerHTML = `
+          <button onclick="openLoginModal()">Se connecter</button>
+          <div class="profile-dropdown-divider"></div>
+          <button onclick="openSignupModal()">S'inscrire</button>
+        `;
+      }
+    }
+
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('active');
+    }
+
+    function closeProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.remove('active');
+    }
+
+    function openInfoModal() {
+      document.getElementById('infoModal').classList.add('active');
+    }
+
+    function closeInfoModal() {
+      document.getElementById('infoModal').classList.remove('active');
+    }
+
+    function openLoginModal() {
+      closeProfileDropdown();
+      document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('active');
+      document.getElementById('loginForm').reset();
+    }
+
+    function openSignupModal() {
+      closeProfileDropdown();
+      document.getElementById('signupModal').classList.add('active');
+    }
+
+    function closeSignupModal() {
+      document.getElementById('signupModal').classList.remove('active');
+      document.getElementById('signupForm').reset();
+    }
+
+    function switchToSignup() {
+      closeLoginModal();
+      openSignupModal();
+    }
+
+    function switchToLogin() {
+      closeSignupModal();
+      openLoginModal();
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      if (!email || !password) {
+        console.warn('Veuillez remplir tous les champs');
+        return;
+      }
+
+      const users = getUsers();
+      const user = users.find(u => (u.email === email || u.pseudo === email) && u.password === password);
+
+      if (user) {
+        setCurrentUser(user.pseudo);
+        closeLoginModal();
+        alert(`✅ Bienvenue ${user.pseudo} ! 🎉`);
+
+        // LOG: Connexion réussie
+        sendAuthLog('🔐 Connexion réussie', [
+          { name: 'Pseudo', value: user.pseudo, inline: true },
+          { name: 'Email', value: user.email, inline: true },
+          { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+        ]);
+      } else {
+        alert('❌ Email/Pseudo ou mot de passe incorrect');
+      }
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+
+      const pseudo = document.getElementById('signupPseudo').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value.trim();
+      const passwordConfirm = document.getElementById('signupPasswordConfirm').value.trim();
+
+      if (!pseudo || !email || !password || !passwordConfirm) {
+        console.warn('Veuillez remplir tous les champs');
+        return;
+      }
+
+      if (password !== passwordConfirm) {
+        console.warn('Les mots de passe ne correspondent pas');
+        return;
+      }
+
+      if (password.length < 6) {
+        console.warn('Le mot de passe doit contenir au moins 6 caractères');
+        return;
+      }
+
+      const users = getUsers();
+      const userExists = users.some(u => u.email === email || u.pseudo === pseudo);
+
+      if (userExists) {
+        console.warn('Cet email ou pseudo est déjà utilisé');
+        return;
+      }
+
+      const newUser = {
+        pseudo: pseudo,
+        email: email,
+        password: password,
+        createdAt: new Date().toLocaleDateString('fr-FR')
+      };
+
+      users.push(newUser);
+      saveUsers(users);
+      
+      setCurrentUser(pseudo);
+      closeSignupModal();
+
+      // LOG: Nouvelle inscription
+      sendAuthLog('👤 Nouvelle inscription', [
+        { name: 'Pseudo', value: pseudo, inline: true },
+        { name: 'Email', value: email, inline: true },
+        { name: 'Date', value: new Date().toLocaleString('fr-FR'), inline: false }
+      ]);
+    }
+
+    function viewProfile() {
+      const currentUser = getCurrentUser();
+      if (currentUser) {
+        alert(`Profil: ${currentUser}\n\nVous êtes connecté au forum Flash CBC Agency.`);
+      }
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      const profileBtn = document.querySelector('.profile-btn');
+      const profileDropdown = document.getElementById('profileDropdown');
+      
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        closeProfileDropdown();
+      }
+
+      const loginModal = document.getElementById('loginModal');
+      const signupModal = document.getElementById('signupModal');
+      
+      if (e.target === loginModal) closeLoginModal();
+      if (e.target === signupModal) closeSignupModal();
     });
   </script>
 </body>
